@@ -21,9 +21,11 @@ export class PostsService {
     }
 
     updatePost(data: Partial<Post>, id: number) {
-        this.posts = this.posts.map((post) =>
-            post.id == id ? { ...post, ...data } : post
-        );
-        return this.posts.find((post) => post.id == id) as Post;
+        let item = this.posts.filter(item =>  item.id == id).map(post =>{
+            return { ...post, ...data }
+         } ).pop();
+         console.table(`patch${item}`);
+         data['id'] = id;
+        return this.http.patch<any>(environment.baseURL + 'posts/'+id, data);
     }
 }
