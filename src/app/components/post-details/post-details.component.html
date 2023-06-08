@@ -1,0 +1,23 @@
+<div class="container">
+    <!-- ng-container è un tipo particolare di contenitore di Angular in grado di recuperare i singoli dati dalle variabili e di essere visualizzato a condizione; con l'alternativa else si chiama un template alternativo quando il container non è disponibile -->
+    <ng-container *ngIf="post; else alternativo">
+        <h1 class="text-center mt-4 mb-3">
+            {{post.title}}
+        </h1>
+        <p>{{post.body}}</p>
+        <p>Categoria: {{post.type}}</p>
+        <p>Id: {{post.id}}</p>
+        <p *ngIf="post.active; else inattivo">
+            Stato: attivo
+        </p>
+    </ng-container>
+    <!-- ng-template viene chiamato dall'else del container e cambia il contenuto del container -->
+    <ng-template #alternativo>
+        <h1 class="text-center mt-5">Post non trovato!</h1>
+    </ng-template>
+    <ng-template #inattivo>
+        <p>Stato: inattivo</p>
+    </ng-template>
+
+
+</div>
